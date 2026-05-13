@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ana Luiza Bartulici | Estratégia e Audiovisual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Antonio:wght@100;400;700&family=Crimson+Pro:ital,wght@0,200;0,400;1,200;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/14.0.2/twemoji.min.js" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+
+    :root {
+      --bg: #0d080f;
+      --bg2: #120a14;
+      --bg3: #1a0f1e;
+      --red: #750608;
+      --red-l: #a01010;
+      --blue: #74A5BE;
+      --blue-d: rgba(116,165,190,0.18);
+      --mauve-l: #a06ab0;
+      --cream: #ede5d8;
+      --cream-m: rgba(237,229,216,0.52);
+      --cream-d: rgba(237,229,216,0.16);
+      --border: rgba(237,229,216,0.07);
+      --border-r: rgba(117,6,8,0.32);
+      --bebas: 'Bebas Neue', sans-serif;
+      --ant: 'Antonio', sans-serif;
+      --cri: 'Crimson Pro', serif;
+      --mono: 'Courier Prime', monospace;
+    }
+
+    body { background: var(--bg); color: var(--cream); font-family: var(--mono); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+    /* Twemoji */
+    img.emoji { height:1.1em; width:1.1em; vertical-align:-.15em; display:inline-block; }
+
+    /* GRAIN */
+    .grain {
+      position: fixed; inset: 0; z-index: 9998; pointer-events: none;
+      opacity: .15; mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      animation: grain .6s steps(2) infinite;
+    }
+    @keyframes grain {
+      0%{transform:translate(0,0)} 25%{transform:translate(-3px,2px)}
+      50%{transform:translate(2px,-3px)} 75%{transform:translate(3px,1px)}
+      100%{transform:translate(-1px,3px)}
+    }
+
+    /* CURSOR */
+    .cursor { position:fixed; width:10px; height:10px; background:var(--red-l); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); mix-blend-mode:difference; transition:width .3s,height .3s; }
+    .cursor-ring { position:fixed; width:36px; height:36px; border:1px solid rgba(160,16,16,.5); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:width .3s,height .3s,opacity .3s; }
+    .progress-bar { position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg,var(--red),var(--blue)); z-index:9997; width:0%; pointer-events:none; }
+
+    /* NAV */
+    nav { position:fixed; top:0; left:0; right:0; z-index:900; display:flex; justify-content:space-between; align-items:center; padding:1.4rem 5vw; }
+    nav.scrolled { background:rgba(13,8,15,.93); backdrop-filter:blur(18px); border-bottom:1px solid var(--border); }
+    .logo { font-family:var(--bebas); font-size:1.5rem; letter-spacing:.18em; color:var(--cream); text-decoration:none; }
+    .logo em { color:var(--red-l); font-style:normal; }
+    .nav-r { display:flex; align-items:center; gap:2rem; }
+    .nav-r a { font-family:var(--mono); font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; color:var(--cream-m); text-decoration:none; transition:color .2s; }
+    .nav-r a:hover { color:var(--red-l); }
+    .nav-menu-btn { display:none; background:none; border:none; cursor:pointer; padding:.5rem; flex-direction:column; gap:5px; }
+    .nav-menu-btn span { display:block; width:22px; height:1px; background:var(--cream); transition:all .3s; }
+
+    /* HERO */
+    #hero { min-height:100svh; position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:flex-end; padding:0 5vw 4rem; }
+    .hero-stripe { position:absolute; top:0; left:0; right:0; height:3px; background:var(--red); z-index:4; }
+    .hero-inner { position:relative; z-index:3; display:grid; grid-template-columns:1fr 260px; align-items:flex-end; gap:3rem; }
+    .hero-eyebrow { font-family:var(--mono); font-size:.65rem; letter-spacing:.26em; text-transform:uppercase; color:var(--blue); margin-bottom:1.2rem; display:inline-flex; align-items:center; gap:.7rem; }
+    .hero-eyebrow::before{content:'[';opacity:.45} .hero-eyebrow::after{content:']';opacity:.45}
+    .hero-title { font-family:var(--bebas); font-size:clamp(4rem,12vw,13rem); line-height:.82; color:var(--cream); }
+    .hero-title .red { color:var(--red-l); }
+    .hero-side { display:flex; flex-direction:column; justify-content:flex-end; gap:1.5rem; padding-bottom:.3rem; }
+    .hero-desc { font-size:.78rem; line-height:1.85; color:var(--cream-m); border-right:1px solid var(--red); padding-right:1.4rem; text-align:right; }
+    .hero-scroll { font-family:var(--mono); font-size:.55rem; letter-spacing:.2em; text-transform:uppercase; color:var(--cream-d); display:flex; align-items:center; gap:.6rem; justify-content:flex-end; }
+    .hero-scroll::after { content:''; width:40px; height:1px; background:var(--red-l); }
+
+    /* MANIFESTO */
+    #manifesto { background:var(--bg2); border-top:1px solid var(--border); padding:7rem 5vw; }
+    .man-inner { max-width:1300px; margin:0 auto; }
+    .man-text { font-family:var(--ant); font-size:clamp(1.8rem,4vw,4rem); font-weight:400; text-transform:uppercase; line-height:1.1; }
+    .man-text em { font-family:var(--cri); font-style:italic; font-weight:200; color:var(--blue); font-size:1.06em; text-transform:none; }
+    .man-text .red { color:var(--red-l); }
+    .man-quote-row { margin-top:3rem; padding-top:2rem; border-top:1px solid var(--border-r); display:flex; justify-content:flex-end; }
+    .man-quote { font-family:var(--cri); font-style:italic; font-size:1rem; color:var(--cream-m); max-width:400px; text-align:right; line-height:1.75; }
+    .man-quote cite { display:block; margin-top:1rem; font-style:normal; font-family:var(--mono); font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; color:var(--cream-d); }
+
+    /* COUNTERS */
+    #counters { background:var(--bg2); border-top:1px solid var(--border); padding:3rem 5vw; }
+    .cnt-grid { max-width:1300px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); }
+    .cnt-item { background:var(--bg2); padding:2rem 1.5rem; position:relative; overflow:hidden; }
+    .cnt-item::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--red); transform:scaleX(0); transform-origin:left; transition:transform .8s cubic-bezier(.22,1,.36,1); }
+    .cnt-item.ani::after { transform:scaleX(1); }
+    .cnt-num { font-family:var(--bebas); font-size:clamp(2.5rem,5vw,4.5rem); line-height:1; color:var(--cream); display:flex; align-items:baseline; gap:.1rem; }
+    .cnt-suf { font-size:.45em; color:var(--red-l); }
+    .cnt-label { font-family:var(--mono); font-size:.56rem; letter-spacing:.18em; text-transform:uppercase; color:var(--cream-d); margin-top:.4rem; }
+    .cnt-desc { font-size:.7rem; color:var(--cream-m); margin-top:.25rem; line-height:1.5; }
+
+    /* SEÇÃO GENÉRICA */
+    .sec { padding:7rem 5vw; position:relative; }
+    .sec + .sec { border-top:1px solid var(--border); }
+    .sec-inner { max-width:1300px; margin:0 auto; }
+    .sec-label { font-family:var(--mono); font-size:.6rem; letter-spacing:.26em; text-transform:uppercase; color:var(--red-l); margin-bottom:1.5rem; display:flex; align-items:center; gap:.7rem; }
+    .sec-label::before { content:'//'; opacity:.4; }
+    .sec-num { font-family:var(--bebas); font-size:clamp(5rem,12vw,10rem); line-height:1; color:transparent; -webkit-text-stroke:1px rgba(117,6,8,.14); position:absolute; top:2.5rem; right:5vw; pointer-events:none; user-select:none; }
+
+    /* SOBRE */
+    .sobre-grid { max-width:1300px; margin:0 auto; display:grid; grid-template-columns:1.1fr 1fr; gap:0; }
+    .sobre-l { padding-right:4rem; border-right:1px solid var(--border-r); }
+    .sobre-heading { font-family:var(--ant); font-size:clamp(2.5rem,5vw,4.5rem); font-weight:700; line-height:.9; text-transform:uppercase; margin-bottom:2rem; }
+    .sobre-heading em { font-family:var(--cri); font-style:italic; font-weight:200; color:var(--blue); font-size:1.1em; text-transform:none; display:block; }
+    .sbody { font-size:.85rem; line-height:2; color:var(--cream-m); margin-bottom:1rem; }
+    .sbody strong { color:var(--cream); }
+    .skills { margin-top:2rem; display:flex; flex-wrap:wrap; gap:.3rem; }
+    .skill { font-family:var(--mono); font-size:.54rem; letter-spacing:.14em; text-transform:uppercase; padding:.3rem .8rem; border:1px solid var(--border-r); color:var(--cream-d); transition:all .22s; cursor:default; }
+    .skill:hover { border-color:var(--red-l); color:var(--red-l); }
+    .sobre-r { padding-left:4rem; }
+    .photo-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; }
+    .photo-item { position:relative; overflow:hidden; cursor:pointer; }
+    .photo-item img { width:100%; aspect-ratio:3/4; object-fit:cover; object-position:top; filter:grayscale(100%) contrast(1.1); display:block; transition:filter .6s, transform .8s cubic-bezier(.22,1,.36,1); }
+    .photo-item::after { content:''; position:absolute; inset:-1px; border:1px solid var(--border-r); z-index:2; pointer-events:none; transition:border-color .4s; }
+    .photo-item:hover img { filter:grayscale(0%) contrast(1.1); transform:scale(1.05); }
+    .photo-item:hover::after { border-color:var(--red-l); }
+    .photo-cap { font-family:var(--mono); font-size:.54rem; letter-spacing:.16em; text-transform:uppercase; color:var(--cream-d); padding-top:.6rem; border-top:1px solid var(--border); margin-top:1rem; }
+    .tl { margin-top:2rem; }
+    .tl-row { display:grid; grid-template-columns:52px 1fr; gap:1rem; padding:.8rem 0; border-bottom:1px solid var(--border); }
+    .tl-y { font-family:var(--bebas); font-size:1rem; color:var(--red-l); line-height:1.5; }
+    .tl-co { font-family:var(--ant); font-size:.88rem; text-transform:uppercase; letter-spacing:.04em; color:var(--cream); }
+    .tl-ro { font-size:.7rem; color:var(--cream-m); margin-top:.12rem; }
+
+    /* HABILIDADES */
+    .hab-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:2.5rem; }
+    .hab-item { padding:1.8rem; border:1px solid var(--border); position:relative; overflow:hidden; transition:border-color .3s; }
+    .hab-item::before { content:''; position:absolute; top:0; left:0; width:3px; height:0; background:var(--red); transition:height .4s cubic-bezier(.22,1,.36,1); }
+    .hab-item:hover { border-color:var(--border-r); }
+    .hab-item:hover::before { height:100%; }
+    .hab-icon { font-size:1.5rem; margin-bottom:1rem; }
+    .hab-title { font-family:var(--bebas); font-size:1.4rem; color:var(--cream); margin-bottom:.6rem; letter-spacing:.04em; }
+    .hab-desc { font-size:.75rem; color:var(--cream-m); line-height:1.7; }
+
+    /* STUDIO */
+    .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.2rem; margin-top:2.5rem; }
+    .gallery-item { position:relative; overflow:hidden; min-height:220px; display:flex; align-items:center; justify-content:center; border:1px solid var(--border-r); background:var(--bg3); cursor:pointer; }
+    .gallery-item::before { content:''; position:absolute; inset:0; z-index:2; pointer-events:none; border:1px solid transparent; transition:border-color .4s,box-shadow .4s; }
+    .gallery-item:hover::before { border-color:var(--red-l); box-shadow:inset 0 0 30px rgba(117,6,8,.1); }
+    .gallery-item img { width:100%; height:100%; object-fit:contain; filter:grayscale(70%) contrast(1.1); opacity:.7; padding:.8rem; transition:filter .6s,opacity .6s,transform .8s cubic-bezier(.22,1,.36,1); }
+    .gallery-item:hover img { filter:grayscale(0%) contrast(1.05); opacity:1; transform:scale(1.04); }
+    .studio-desc { max-width:700px; }
+
+    /* CASES */
+    .case-sec { margin-bottom:5rem; padding-bottom:5rem; border-bottom:1px solid var(--border); }
+    .case-sec:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0; }
+    .case-header { display:flex; align-items:flex-end; justify-content:space-between; gap:2rem; flex-wrap:wrap; }
+    .case-meta { display:flex; flex-direction:column; gap:.3rem; }
+    .case-num { font-family:var(--mono); font-size:.56rem; letter-spacing:.2em; text-transform:uppercase; color:var(--red-l); }
+    .case-client-tag { font-family:var(--mono); font-size:.56rem; letter-spacing:.18em; text-transform:uppercase; color:var(--cream-d); }
+    .case-title { font-family:var(--bebas); font-size:clamp(2.5rem,7vw,4.5rem); line-height:.9; position:relative; display:inline-block; }
+    .case-title::after { content:''; position:absolute; left:0; bottom:-4px; width:0; height:2px; background:var(--red-l); transition:width .6s cubic-bezier(.22,1,.36,1); }
+    .case-sec.in-view .case-title::after { width:100%; }
+    .case-link { font-family:var(--mono); font-size:.6rem; letter-spacing:.16em; text-transform:uppercase; color:var(--blue); text-decoration:none; border:1px solid var(--blue-d); padding:.5rem 1rem; transition:all .25s; white-space:nowrap; align-self:flex-end; }
+    .case-link:hover { background:var(--blue-d); color:var(--cream); }
+    .case-desc { font-size:.85rem; line-height:2; color:var(--cream-m); max-width:680px; margin:1.8rem 0; }
+    .case-tags { display:flex; flex-wrap:wrap; gap:.4rem; margin-bottom:1.5rem; }
+    .case-tag { font-family:var(--mono); font-size:.52rem; letter-spacing:.12em; text-transform:uppercase; padding:.25rem .7rem; border:1px solid var(--border); color:var(--cream-d); }
+    .case-gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.2rem; margin-top:1.5rem; }
+    .case-gallery.single { grid-template-columns:minmax(200px,460px); }
+    .case-gallery.landscape-only { grid-template-columns:1fr 1fr; }
+    .case-gallery.landscape-mix { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
+    .case-img { position:relative; overflow:hidden; border:1px solid var(--border-r); background:var(--bg3); display:flex; align-items:center; justify-content:center; }
+    .case-img.portrait { aspect-ratio:3/4; }
+    .case-img.landscape { aspect-ratio:16/10; }
+    .case-img:not(.portrait):not(.landscape) { min-height:240px; }
+    .case-img::before { content:''; position:absolute; inset:0; z-index:2; pointer-events:none; border:1px solid transparent; transition:border-color .4s,box-shadow .4s; }
+    .case-img:hover::before { border-color:var(--red-l); box-shadow:inset 0 0 20px rgba(117,6,8,.08); }
+    .case-img img { width:100%; height:100%; object-fit:contain; filter:grayscale(70%) contrast(1.1); opacity:.7; padding:.5rem; transition:filter .6s,opacity .6s,transform .8s cubic-bezier(.22,1,.36,1); }
+    .case-img:hover img { filter:grayscale(0%) contrast(1.05); opacity:1; transform:scale(1.04); }
+
+    /* SERVIÇOS */
+    #servicos { background:var(--bg2); }
+    .srv-inner { max-width:1300px; margin:0 auto; }
+    .srv-h { font-family:var(--bebas); font-size:clamp(3rem,7vw,6.5rem); line-height:.85; margin-bottom:3rem; }
+    .srv-h em { font-family:var(--cri); font-style:italic; font-weight:200; color:var(--red-l); font-size:.6em; display:block; }
+    .srv-g { display:grid; grid-template-columns:repeat(2,1fr); }
+    .srv-item { padding:2.5rem 0; border-bottom:1px solid var(--border); }
+    .srv-item:nth-child(odd) { border-right:1px solid var(--border); padding-right:3rem; }
+    .srv-item:nth-child(even) { padding-left:3rem; }
+    .srv-step { font-family:var(--mono); font-size:.54rem; letter-spacing:.2em; text-transform:uppercase; color:var(--red-l); margin-bottom:.6rem; }
+    .srv-nm { font-family:var(--bebas); font-size:2rem; line-height:.9; color:var(--cream); margin-bottom:.8rem; }
+    .srv-tx { font-size:.78rem; line-height:1.8; color:var(--cream-m); }
+
+    /* CONTATO */
+    #contato { background:var(--bg); border-top:1px solid var(--border); }
+    .contato-inner { max-width:1300px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:center; }
+    .contato-h { font-family:var(--bebas); font-size:clamp(3.5rem,9vw,8rem); line-height:.82; }
+    .contato-h .red { color:var(--red-l); }
+    .contato-h .blue { color:var(--blue); }
+    .contato-sub { font-size:.82rem; color:var(--cream-m); margin-top:1.5rem; line-height:1.8; max-width:380px; }
+    .contato-links { margin-top:2.5rem; display:flex; flex-direction:column; gap:1rem; }
+    .contato-link { display:flex; align-items:center; gap:1rem; text-decoration:none; color:var(--cream-m); font-size:.8rem; transition:color .2s; padding:.8rem 0; border-bottom:1px solid var(--border); }
+    .contato-link:hover { color:var(--red-l); }
+    .contato-link .lbl { font-family:var(--mono); font-size:.54rem; letter-spacing:.18em; text-transform:uppercase; color:var(--cream-d); display:block; margin-bottom:.2rem; }
+    .contato-r { display:flex; flex-direction:column; gap:1rem; }
+    .form-group { display:flex; flex-direction:column; gap:.4rem; }
+    .form-group label { font-family:var(--mono); font-size:.55rem; letter-spacing:.18em; text-transform:uppercase; color:var(--cream-d); }
+    .form-group input, .form-group textarea, .form-group select {
+      background:var(--bg3); border:1px solid var(--border); color:var(--cream);
+      font-family:var(--mono); font-size:.78rem; padding:.8rem 1rem;
+      outline:none; transition:border-color .2s; resize:none; width:100%;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color:var(--red-l); }
+    .form-group textarea { min-height:100px; }
+    .btn-submit { font-family:var(--bebas); font-size:1.1rem; letter-spacing:.12em; background:var(--red); color:var(--cream); border:none; padding:1rem 2.5rem; cursor:pointer; transition:background .3s,transform .2s; width:100%; margin-top:.5rem; }
+    .btn-submit:hover { background:var(--red-l); transform:translateY(-2px); }
+
+    /* FOOTER */
+    footer { padding:2rem 5vw; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+    .footer-copy { font-size:.65rem; color:var(--cream-d); }
+    .footer-links { display:flex; gap:1.5rem; }
+    .footer-links a { font-size:.65rem; color:var(--cream-d); text-decoration:none; letter-spacing:.1em; text-transform:uppercase; transition:color .2s; }
+    .footer-links a:hover { color:var(--red-l); }
+
+    /* REVEAL */
+    @keyframes reveal { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+    .reveal { animation:reveal .8s ease-out forwards; opacity:0; }
+    .reveal.d1{animation-delay:.1s} .reveal.d2{animation-delay:.2s}
+    .reveal.d3{animation-delay:.3s} .reveal.d4{animation-delay:.4s} .reveal.d5{animation-delay:.5s}
+
+    /* ===================== MOBILE ===================== */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns:1fr; gap:1.5rem; }
+      .hero-side { display:none; }
+      .sobre-grid { grid-template-columns:1fr; }
+      .sobre-l { padding-right:0; border-right:none; border-bottom:1px solid var(--border-r); padding-bottom:3rem; margin-bottom:3rem; }
+      .sobre-r { padding-left:0; }
+      .hab-grid { grid-template-columns:1fr; }
+      .cnt-grid { grid-template-columns:repeat(2,1fr); }
+      .case-gallery { grid-template-columns:1fr; }
+      .case-gallery.landscape-only { grid-template-columns:1fr; }
+      .case-gallery.landscape-mix { grid-template-columns:1fr; }
+      .srv-g { grid-template-columns:1fr; }
+      .srv-item:nth-child(odd) { border-right:none; padding-right:0; }
+      .srv-item:nth-child(even) { padding-left:0; }
+      .contato-inner { grid-template-columns:1fr; gap:3rem; }
+      footer { flex-direction:column; text-align:center; }
+      .nav-r { display:none; }
+      .nav-menu-btn { display:flex; }
+      .nav-r.open { display:flex; flex-direction:column; position:fixed; top:0; right:0; bottom:0; width:70vw; background:rgba(13,8,15,.98); backdrop-filter:blur(20px); padding:5rem 2rem 2rem; gap:2rem; z-index:800; border-left:1px solid var(--border); align-items:flex-start; }
+      .nav-r.open a { font-size:1.1rem; }
+      .photo-grid { grid-template-columns:repeat(2,1fr); }
+      .man-text { font-size:clamp(1.5rem,7vw,3rem); }
+      .case-header { flex-direction:column; align-items:flex-start; gap:1rem; }
+      .case-link { align-self:flex-start; }
+      .gallery { grid-template-columns:repeat(2,1fr); }
+    }
+
+    @media (max-width: 500px) {
+      .cnt-grid { grid-template-columns:repeat(2,1fr); }
+      .photo-grid { grid-template-columns:1fr 1fr; }
+      .hero-title { font-size:clamp(3.5rem,18vw,6rem); }
+      .sec { padding:5rem 5vw; }
+      .gallery { grid-template-columns:1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">ANA<em>LUIZA</em></a>
+  <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-r" id="navLinks">
+    <a href="#sobre">Perfil</a>
+    <a href="#studio">Studio</a>
+    <a href="#cases">Cases</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#contato">Contato</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-stripe"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Estratégia · Audiovisual · Branding</div>
+      <h1 class="hero-title">ANA<br>LUIZA<br><span class="red">BARTULICI</span></h1>
+    </div>
+    <div class="hero-side">
+      <div class="hero-desc">Publicitária especialista em planejamento estratégico e produção audiovisual. Do conceito à entrega — comunicação que gera conexão real.</div>
+      <div class="hero-scroll">scroll</div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section id="manifesto">
+  <div class="man-inner">
+    <div class="man-text reveal">
+      COMUNICAÇÃO NÃO É<br>
+      SOBRE <span class="red">RUÍDO,</span><br>
+      É SOBRE <em>conexão.</em><br>
+      ESTRATÉGIA É<br>
+      A ARTE DE FAZER<br>
+      <em>menos render mais.</em>
+    </div>
+    <div class="man-quote-row reveal d2">
+      <div class="man-quote">
+        O trabalho que nos define não é o que fazemos, mas o que fazemos sentir. Cada projeto é uma oportunidade de contar histórias, fortalecer posicionamentos e gerar conexão real com o público.
+        <cite>— Ana Luiza Bartulici</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTERS -->
+<section id="counters">
+  <div class="cnt-grid">
+    <div class="cnt-item reveal d1">
+      <div class="cnt-num"><span class="cnum" data-t="9">0</span></div>
+      <div class="cnt-label">Cases</div>
+      <div class="cnt-desc">Projetos de sucesso entregues</div>
+    </div>
+    <div class="cnt-item reveal d2">
+      <div class="cnt-num"><span class="cnum" data-t="9">0</span></div>
+      <div class="cnt-label">Anos de mercado</div>
+      <div class="cnt-desc">Desde 2016 em comunicação</div>
+    </div>
+    <div class="cnt-item reveal d3">
+      <div class="cnt-num"><span class="cnum" data-t="26">0</span><span class="cnt-suf">+</span></div>
+      <div class="cnt-label">Operações geridas</div>
+      <div class="cnt-desc">PDVs Rommanel MG</div>
+    </div>
+    <div class="cnt-item reveal d4">
+      <div class="cnt-num"><span class="cnum" data-t="2022">0</span></div>
+      <div class="cnt-label">Studio Frolli</div>
+      <div class="cnt-desc">Fundação do estúdio</div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre" class="sec">
+  <div class="sec-num">01</div>
+  <div class="sobre-grid">
+    <div class="sobre-l">
+      <div class="sec-label reveal">Perfil</div>
+      <h2 class="sobre-heading reveal d1">MUITO<br>ALÉM<br><em>do visual.</em></h2>
+      <p class="sbody reveal d2">Publicitária formada pela <strong>PUC-MG</strong>, pós-graduada em Branding pela <strong>UNICV</strong> e fundadora do <strong>Studio Frolli</strong>. Atuo na área desde 2016.</p>
+      <p class="sbody reveal d3">Especialista em <strong>planejamento estratégico para marcas</strong>, com foco em construir posicionamentos sólidos e direcionar a comunicação de forma inteligente e orientada a resultados. Minha atuação envolve o desenvolvimento de estratégias que se desdobram em criação de conteúdo, elaboração de projetos de comunicação e marketing e fortalecimento da presença de marca no mercado.</p>
+      <p class="sbody reveal d4">Atualmente tenho direcionado meu foco para <strong>produções audiovisuais</strong> e criações visuais para empresas, unindo estratégia e estética para desenvolver conteúdos que geram impacto, conexão e posicionamento relevante no digital.</p>
+      <div class="skills reveal d5">
+        <span class="skill">Audiovisual Estratégico</span>
+        <span class="skill">Fotografia Publicitária</span>
+        <span class="skill">Copywriting</span>
+        <span class="skill">Planejamento</span>
+        <span class="skill">Identidade Visual</span>
+        <span class="skill">Branding</span>
+        <span class="skill">Gestão de Conta</span>
+        <span class="skill">PUC-MG</span>
+        <span class="skill">UNICV</span>
+      </div>
+    </div>
+    <div class="sobre-r">
+      <div class="photo-grid reveal d1">
+        <div class="photo-item"><img src="imgs/sobre/1.png" alt="Ana 01"></div>
+        <div class="photo-item"><img src="imgs/sobre/2.png" alt="Ana 02"></div>
+        <div class="photo-item"><img src="imgs/sobre/3.png" alt="Ana 03"></div>
+        <div class="photo-item"><img src="imgs/sobre/4.png" alt="Ana 04"></div>
+      </div>
+      <p class="photo-cap reveal d2">Fig. 01 — Ana Luiza Bartulici — Belo Horizonte, MG</p>
+      <div class="tl reveal d3">
+        <div class="tl-row">
+          <div class="tl-y">2022</div>
+          <div><div class="tl-co">Studio Frolli</div><div class="tl-ro">Fundadora & Diretora Criativa</div></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-y">2020</div>
+          <div><div class="tl-co">Two Comunicação</div><div class="tl-ro">Estrategista — Conta ArcelorMittal Longos</div></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-y">2018</div>
+          <div><div class="tl-co">LowKA</div><div class="tl-ro">Estratégia de Conteúdo — K-Happy Kombucha</div></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-y">2016</div>
+          <div><div class="tl-co">Mercado</div><div class="tl-ro">Início na área de Comunicação</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HABILIDADES -->
+<section id="habilidades" class="sec">
+  <div class="sec-num">02</div>
+  <div class="sec-inner">
+    <div class="sec-label reveal">O que faço</div>
+    <h2 class="sobre-heading reveal d1">HABILIDADES<br><em>e expertises.</em></h2>
+    <div class="hab-grid">
+      <div class="hab-item reveal d1">
+        <div class="hab-icon">🎥</div>
+        <div class="hab-title">Produção Audiovisual</div>
+        <div class="hab-desc">Direção criativa, produção de vídeos e fotografias estratégicas para marcas. Do planejamento ao set, com foco em conteúdo que gera impacto e conexão real.</div>
+      </div>
+      <div class="hab-item reveal d2">
+        <div class="hab-icon">📐</div>
+        <div class="hab-title">Planejamento Estratégico</div>
+        <div class="hab-desc">Desenvolvimento de estratégias integradas de comunicação, gestão de contas e condução de projetos com acompanhamento rigoroso de entregas e resultados.</div>
+      </div>
+      <div class="hab-item reveal d3">
+        <div class="hab-icon">✍️</div>
+        <div class="hab-title">Copywriting & Conteúdo</div>
+        <div class="hab-desc">Criação de conteúdo orientado a conversão e posicionamento. Textos que comunicam a essência da marca de forma autêntica, relevante e estratégica.</div>
+      </div>
+      <div class="hab-item reveal d4">
+        <div class="hab-icon">🎨</div>
+        <div class="hab-title">Identidade Visual</div>
+        <div class="hab-desc">Desenvolvimento e gestão de identidade visual alinhada ao posicionamento da marca. Branding que reflete a personalidade e fortalece a presença no mercado.</div>
+      </div>
+      <div class="hab-item reveal d5">
+        <div class="hab-icon">📸</div>
+        <div class="hab-title">Fotografia Publicitária</div>
+        <div class="hab-desc">Ensaios fotográficos editoriais e institucionais com direção de cena, iluminação e styling. Imagens que constroem narrativa e identidade visual forte.</div>
+      </div>
+      <div class="hab-item reveal d1">
+        <div class="hab-icon">📊</div>
+        <div class="hab-title">Gestão de Marca</div>
+        <div class="hab-desc">Alinhamento de comunicação entre diferentes pontos de contato, identificação de oportunidades de crescimento e garantia de consistência na performance digital.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STUDIO FROLLI -->
+<section id="studio" class="sec">
+  <div class="sec-num">03</div>
+  <div class="sec-inner">
+    <div class="sec-label reveal">Estúdio</div>
+    <h2 class="sobre-heading reveal d1">STUDIO<br><span style="color:var(--red-l)">FROLLI</span></h2>
+    <p class="sbody studio-desc reveal d2">O Studio Frolli nasce da parceria entre duas publicitárias apaixonadas pelo audiovisual, que uniram suas visões criativas e estratégicas com o propósito de desenvolver <strong>experiências visuais únicas e memoráveis</strong>.</p>
+    <p class="sbody studio-desc reveal d3">O Frolli atua na criação de conteúdos que vão além do visual, buscando transmitir a essência de cada marca de forma autêntica e relevante. <strong>Nosso trabalho integra planejamento, direção criativa e execução</strong>, resultando em produções que alinham conceito, identidade e impacto em vídeos e fotos.</p>
+    <div class="gallery reveal d4">
+      <div class="gallery-item"><img src="imgs/studio/logo.png" alt="Studio Frolli Logo"></div>
+      <div class="gallery-item"><img src="imgs/studio/1.png" alt="Frolli 01"></div>
+      <div class="gallery-item"><img src="imgs/studio/2.png" alt="Frolli 02"></div>
+      <div class="gallery-item"><img src="imgs/studio/3.png" alt="Frolli 03"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section id="cases" class="sec">
+  <div class="sec-num">04</div>
+  <div class="sec-inner">
+    <div class="sec-label reveal">Trabalhos selecionados</div>
+    <h2 class="sobre-heading reveal d1">CASES<br><em>de sucesso.</em></h2>
+
+    <!-- ARCELOR -->
+    <div class="case-sec reveal d2">
+      <div class="case-header">
+        <div class="case-meta">
+          <span class="case-num">Case 01</span>
+          <span class="case-client-tag">Two Comunicação</span>
+          <h3 class="case-title">ArcelorMittal</h3>
+        </div>
+        <a href="https://www.instagram.com/arcelormittalbrasil/" target="_blank" class="case-link">Ver Instagram →</a>
+      </div>
+      <div class="case-tags">
+        <span class="case-tag">Planejamento Estratégico</span>
+        <span class="case-tag">Atendimento de Conta</span>
+        <span class="case-tag">Comunicação Corporativa</span>
+      </div>
+      <p class="case-desc">Responsável pelo planejamento estratégico e atendimento da conta da <strong>ArcelorMittal Longos</strong>, maior produtora de aço do Brasil, atuando por meio da Two Comunicação. Desenvolvimento de estratégias de comunicação alinhadas aos objetivos da marca, gestão do relacionamento com o cliente e condução de projetos com acompanhamento rigoroso de entregas e resultados.</p>
+      <div class="case-gallery landscape-only">
+        <div class="case-img landscape"><img src="imgs/arcelor/1.png" alt="Arcelor 01"></div>
+        <div class="case-img landscape"><img src="imgs/arcelor/2.png" alt="Arcelor 02"></div>
+      </div>
+    </div>
+
+    <!-- ROMMANEL -->
+    <div class="case-sec reveal d3">
+      <div class="case-header">
+        <div class="case-meta">
+          <span class="case-num">Case 02</span>
+          <span class="case-client-tag">Frolli Studio</span>
+          <h3 class="case-title">Rommanel MG</h3>
+        </div>
+        <a href="https://www.instagram.com/rommanelmg/" target="_blank" class="case-link">Ver Instagram →</a>
+      </div>
+      <div class="case-tags">
+        <span class="case-tag">Estratégia de Conteúdo</span>
+        <span class="case-tag">Varejo</span>
+        <span class="case-tag">Audiovisual</span>
+        <span class="case-tag">Eventos</span>
+      </div>
+      <p class="case-desc">Estrategista de conteúdo para a <strong>Rommanel MG</strong>, liderando o planejamento e a execução das estratégias de comunicação para as <strong>26 operações de varejo</strong> e venda direta da marca. Responsável por direcionar o posicionamento de conteúdo, alinhar a comunicação entre os diferentes pontos de venda, identificar oportunidades de crescimento no digital e garantir consistência e performance nas ações, conectando estratégia, branding e resultados.</p>
+      <div class="case-gallery">
+        <div class="case-img"><img src="imgs/rommanel/1.png" alt="Rommanel 01"></div>
+        <div class="case-img"><img src="imgs/rommanel/2.png" alt="Rommanel 02"></div>
+      </div>
+    </div>
+
+    <!-- K-HAPPY -->
+    <div class="case-sec reveal d4">
+      <div class="case-header">
+        <div class="case-meta">
+          <span class="case-num">Case 03</span>
+          <span class="case-client-tag">LowKA</span>
+          <h3 class="case-title">K-Happy Kombucha</h3>
+        </div>
+        <a href="https://www.instagram.com/khappykombucha/" target="_blank" class="case-link">Ver Instagram →</a>
+      </div>
+      <div class="case-tags">
+        <span class="case-tag">Estratégia de Conteúdo</span>
+        <span class="case-tag">Redes Sociais</span>
+        <span class="case-tag">Ativações de Mercado</span>
+      </div>
+      <p class="case-desc">Estrategista de conteúdo para as marcas <strong>K-Happy Kombucha</strong> e LowKA, sendo responsável pela gestão e direcionamento das redes sociais e pelas ativações de mercado. Atuação envolveu o desenvolvimento de estratégias de conteúdo alinhadas ao posicionamento das marcas, planejamento editorial, criação de campanhas e ações de engajamento, além da idealização e execução de ativações que fortaleceram a presença no mercado e a conexão com o público.</p>
+    </div>
+
+    <!-- GARCIA -->
+    <div class="case-sec reveal d2">
+      <div class="case-header">
+        <div class="case-meta">
+          <span class="case-num">Case 04</span>
+          <span class="case-client-tag">Frolli Studio</span>
+          <h3 class="case-title">Garcia</h3>
+        </div>
+      </div>
+      <div class="case-tags">
+        <span class="case-tag">Ensaio Fotográfico</span>
+        <span class="case-tag">Música Eletrônica</span>
+        <span class="case-tag">Identidade Visual</span>
+      </div>
+      <p class="case-desc">Ensaio fotográfico editorial para o DJ <strong>Garcia</strong>. Direção criativa e produção visual focada em iluminação, styling e linguagem conceitual para construir identidade forte no cenário de música eletrônica.</p>
+      <div class="case-gallery">
+        <div class="case-img"><img src="imgs/garcia/1.png" alt="Garcia 01"></div>
+        <div class="case-img"><img src="imgs/garcia/2.png" alt="Garcia 02"></div>
+        <div class="case-img"><img src="imgs/garcia/3.png" alt="Garcia 03"></div>
+        <div class="case-img"><img src="imgs/garcia/4.png" alt="Garcia 04"></div>
+      </div>
+    </div>
+
+    <!-- CREAMKEST -->
+    <div class="case-sec reveal d3">
+      <div class="case-header">
+        <div class="case-meta">
+          <span class="case-num">Case 05</span>
+          <span class="case-client-tag">Frolli Studio</span>
+          <h3 class="case-title">Creamkest</h3>
+        </div>
+      </div>
+      <div class="case-tags">
+        <span class="case-tag">Ensaio Fotográfico</span>
+        <span class="case-tag">Música Eletrônica</span>
+        <span class="case-tag">Editorial</span>
+      </div>
+      <p class="case-desc">Sessão fotográfica estilosa para <strong>Creamkest</strong>, DJ de eletrônico. Produção visual com foco em iluminação dinâmica e narrativa visual que traduz a energia e identidade do artista em imagens impactantes.</p>
+      <div class="case-gallery landscape-mix">
+        <div class="case-img portrait"><img src="imgs/creamkest/1.png" alt="Creamkest 01"></div>
+        <div class="case-img portrait"><img src="imgs/creamkest/2.png" alt="Creamkest 02"></div>
+        <div class="case-img landscape"><img src="imgs/creamkest/3.png" alt="Creamkest 03"></div>
+        <div class="case-img landscape"><img src="imgs/creamkest/4.png" alt="Creamkest 04"></div>
+      </div>
+    </div>
+
+    <!-- GAVOK -->
+    <div class="case-sec reveal d4">
+      <div class="case-header">
+        <div class="case-meta">
+          <span class="case-num">Case 06</span>
+          <span class="case-client-tag">Frolli Studio</span>
+          <h3 class="case-title">Gavok</h3>
+        </div>
+      </div>
+      <div class="case-tags">
+        <span class="case-tag">Campanha Visual</span>
+        <span class="case-tag">Música Eletrônica</span>
+        <span class="case-tag">Direção Criativa</span>
+      </div>
+      <p class="case-desc">Campanha visual para <strong>Gavok</strong>, artista de música eletrônica. Ensaios fotográficos com conceito bem definido, explorando cores, movimento e ambiente para criar identidade visual coerente e memorável.</p>
+      <div class="case-gallery">
+        <div class="case-img"><img src="imgs/gavok/1.png" alt="Gavok 01"></div>
+        <div class="case-img"><img src="imgs/gavok/2.png" alt="Gavok 02"></div>
+        <div class="case-img"><img src="imgs/gavok/3.png" alt="Gavok 03"></div>
+        <div class="case-img"><img src="imgs/gavok/4.png" alt="Gavok 04"></div>
+      </div>
+    </div>
+
+    <!-- HIGH FREQUENCY -->
+    <div class="case-sec reveal d5">
+      <div class="case-header">
+        <div class="case-meta">
+          <span class="case-num">Case 07</span>
+          <span class="case-client-tag">Frolli Studio</span>
+          <h3 class="case-title">High Frequency</h3>
+        </div>
+      </div>
+      <div class="case-tags">
+        <span class="case-tag">Cobertura de Evento</span>
+        <span class="case-tag">Hardtechno</span>
+        <span class="case-tag">Audiovisual</span>
+        <span class="case-tag">Conteúdo Digital</span>
+      </div>
+      <p class="case-desc">Cobertura audiovisual completa do festival <strong>High Frequency</strong> de hardtechno. Produção de conteúdo editorial, documentação de evento e criação de materiais para redes sociais, capturando a energia e a atmosfera única do festival.</p>
+      <div class="case-gallery">
+        <div class="case-img"><img src="imgs/hfreq/1.png" alt="High Freq 01"></div>
+        <div class="case-img"><img src="imgs/hfreq/2.png" alt="High Freq 02"></div>
+        <div class="case-img"><img src="imgs/hfreq/3.png" alt="High Freq 03"></div>
+        <div class="case-img"><img src="imgs/hfreq/4.png" alt="High Freq 04"></div>
+        <div class="case-img"><img src="imgs/hfreq/5.png" alt="High Freq 05"></div>
+        <div class="case-img"><img src="imgs/hfreq/6.png" alt="High Freq 06"></div>
+        <div class="case-img"><img src="imgs/hfreq/7.png" alt="High Freq 07"></div>
+      </div>
+    </div>
+
+    <!-- PRIMA -->
+    <div class="case-sec reveal d2">
+      <div class="case-header">
+        <div class="case-meta">
+          <span class="case-num">Case 08</span>
+          <span class="case-client-tag">Frolli Studio</span>
+          <h3 class="case-title">Prima Branding</h3>
+        </div>
+        <a href="https://www.instagram.com/p/CVkx2HBD0us/" target="_blank" class="case-link">Ver projeto →</a>
+      </div>
+      <div class="case-tags">
+        <span class="case-tag">Vídeo Editorial</span>
+        <span class="case-tag">Moda</span>
+        <span class="case-tag">Branding</span>
+      </div>
+      <p class="case-desc">Vídeo editorial para a coleção <strong>Pizza and Chill</strong> da Prima Branding. Direção criativa e produção audiovisual com foco na estética da marca e construção de desejo visual.</p>
+      <div class="case-gallery single">
+        <div class="case-img"><img src="imgs/prima/1.png" alt="Prima 01"></div>
+      </div>
+    </div>
+
+    <!-- HANDMADE -->
+    <div class="case-sec reveal d3">
+      <div class="case-header">
+        <div class="case-meta">
+          <span class="case-num">Case 09</span>
+          <span class="case-client-tag">Frolli Studio</span>
+          <h3 class="case-title">Handmade Colors</h3>
+        </div>
+      </div>
+      <div class="case-tags">
+        <span class="case-tag">Ensaio Fotográfico</span>
+        <span class="case-tag">Moda</span>
+        <span class="case-tag">Editorial</span>
+      </div>
+      <p class="case-desc">Sessão fotográfica editorial para <strong>Handmade Colors</strong>. Produção com direção criativa de cenário, iluminação e composição visual para construir narrativa em torno da coleção e dos valores da marca.</p>
+      <div class="case-gallery single">
+        <div class="case-img"><img src="imgs/handmade/1.png" alt="Handmade 01"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos" class="sec">
+  <div class="sec-num">05</div>
+  <div class="srv-inner">
+    <div class="sec-label reveal">Processo</div>
+    <h2 class="srv-h reveal d1">VAMOS<br>CRIAR<br><em>algo.</em></h2>
+    <div class="srv-g">
+      <div class="srv-item reveal d2">
+        <div class="srv-step">01 —</div>
+        <div class="srv-nm">Escuta</div>
+        <div class="srv-tx">Entendo a marca, o público e os objetivos de qualquer solução. Estratégia começa aqui.</div>
+      </div>
+      <div class="srv-item reveal d3">
+        <div class="srv-step">02 —</div>
+        <div class="srv-nm">Planejamento</div>
+        <div class="srv-tx">Estruturação de posicionamento, estratégia editorial e motivação do conteúdo para cada canal e meta.</div>
+      </div>
+      <div class="srv-item reveal d4">
+        <div class="srv-step">03 —</div>
+        <div class="srv-nm">Criação</div>
+        <div class="srv-tx">Produção criativa alinhada à identidade — foto, vídeo, copy e identidade visual integrada.</div>
+      </div>
+      <div class="srv-item reveal d5">
+        <div class="srv-step">04 —</div>
+        <div class="srv-nm">Entrega & Análise</div>
+        <div class="srv-tx">Entrega com acompanhamento, métricas e ajustes analíticos para garantir performance real.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato" class="sec">
+  <div class="sec-num">06</div>
+  <div class="contato-inner">
+    <div>
+      <div class="sec-label reveal">Contato</div>
+      <h2 class="contato-h reveal d1">VAMOS<br><span class="red">CRIAR</span><br><span class="blue">ALGO.</span></h2>
+      <p class="contato-sub reveal d2">Disponível para projetos de audiovisual, estratégia e branding. Respondo em até 24h.</p>
+      <div class="contato-links reveal d3">
+        <a href="https://instagram.com/anabartulici" target="_blank" class="contato-link">
+          <div><span class="lbl">Instagram</span>@anabartulici</div>
+        </a>
+        <a href="https://instagram.com/studiofrolli" target="_blank" class="contato-link">
+          <div><span class="lbl">Studio Frolli</span>@studiofrolli</div>
+        </a>
+        <a href="mailto:oi@studiofrolli.com" class="contato-link">
+          <div><span class="lbl">E-mail</span>oi@studiofrolli.com</div>
+        </a>
+        <a href="https://www.linkedin.com/in/anabartulici" target="_blank" class="contato-link">
+          <div><span class="lbl">LinkedIn</span>Ana Luiza Bartulici</div>
+        </a>
+      </div>
+    </div>
+    <div class="contato-r reveal d2">
+      <div class="form-group">
+        <label>Nome</label>
+        <input type="text" placeholder="Seu nome completo">
+      </div>
+      <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" placeholder="seu@email.com">
+      </div>
+      <div class="form-group">
+        <label>Tipo de projeto</label>
+        <select>
+          <option value="">Selecione...</option>
+          <option>Produção Audiovisual</option>
+          <option>Planejamento Estratégico</option>
+          <option>Fotografia Publicitária</option>
+          <option>Branding & Identidade Visual</option>
+          <option>Cobertura de Evento</option>
+          <option>Outro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Mensagem</label>
+        <textarea placeholder="Conte um pouco sobre seu projeto..."></textarea>
+      </div>
+      <button class="btn-submit" id="btnWhats">ENVIAR VIA WHATSAPP →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">© 2024 Ana Luiza Bartulici · Studio Frolli · Belo Horizonte, MG</div>
+  <div class="footer-links">
+    <a href="https://instagram.com/anabartulici" target="_blank">Instagram</a>
+    <a href="https://instagram.com/studiofrolli" target="_blank">Studio Frolli</a>
+    <a href="mailto:oi@studiofrolli.com">E-mail</a>
+  </div>
+</footer>
+
+<script>
+  // WhatsApp form
+  document.getElementById('btnWhats').addEventListener('click',()=>{
+    const nome = document.querySelector('input[type="text"]').value.trim();
+    const email = document.querySelector('input[type="email"]').value.trim();
+    const tipo = document.querySelector('select').value;
+    const msg = document.querySelector('textarea').value.trim();
+    if(!nome||!msg){ alert('Preencha pelo menos seu nome e mensagem!'); return; }
+    const texto = `Ola Ana!\n\nMeu nome e *${nome}*${email?' ('+email+')':''}.\n${tipo?'Projeto: *'+tipo+'*\n':''}\n${msg}`;
+    window.open('https://wa.me/5531982159902?text='+encodeURIComponent(texto),'_blank');
+  });
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let cx=0,cy=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{
+    cx=e.clientX; cy=e.clientY;
+    cursor.style.left=cx+'px'; cursor.style.top=cy+'px';
+  });
+  (function animRing(){
+    rx+=(cx-rx)*.12; ry+=(cy-ry)*.12;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
+    requestAnimationFrame(animRing);
+  })();
+  document.querySelectorAll('a,.case-img,.gallery-item,.photo-item,.hab-item').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{
+      cursor.style.width='18px'; cursor.style.height='18px';
+      ring.style.width='52px'; ring.style.height='52px';
+    });
+    el.addEventListener('mouseleave',()=>{
+      cursor.style.width='10px'; cursor.style.height='10px';
+      ring.style.width='36px'; ring.style.height='36px';
+    });
+  });
+
+  // Progress bar
+  const bar = document.getElementById('progressBar');
+  window.addEventListener('scroll',()=>{
+    const s=window.scrollY, t=document.body.scrollHeight-window.innerHeight;
+    bar.style.width=(s/t*100)+'%';
+    document.getElementById('nav').classList.toggle('scrolled',s>80);
+    if(document.querySelector('.hero-title')&&s<window.innerHeight)
+      document.querySelector('.hero-title').style.transform=`translateY(${s*.1}px)`;
+  });
+
+  // Mobile menu
+  document.getElementById('menuBtn').addEventListener('click',()=>{
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  document.querySelectorAll('#navLinks a').forEach(a=>a.addEventListener('click',()=>{
+    document.getElementById('navLinks').classList.remove('open');
+  }));
+
+  // Counters
+  const cntObs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting&&!e.target.classList.contains('counted')){
+        const t=parseInt(e.target.dataset.t); let c=0;
+        const inc=Math.ceil(t/50);
+        const tm=setInterval(()=>{
+          c+=inc;
+          if(c>=t){ e.target.textContent=t; clearInterval(tm); e.target.classList.add('counted'); e.target.parentElement.parentElement.classList.add('ani'); }
+          else e.target.textContent=c;
+        },20);
+      }
+    });
+  },{threshold:.5});
+  document.querySelectorAll('.cnum').forEach(el=>cntObs.observe(el));
+
+  // Reveal
+  const revObs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.style.opacity='1'; e.target.style.transform='translateY(0)';
+        const cs=e.target.closest('.case-sec');
+        if(cs) cs.classList.add('in-view');
+      }
+    });
+  },{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+  // Twemoji — carrega por último pra não quebrar nada
+  try { twemoji.parse(document.body,{folder:'svg',ext:'.svg'}); } catch(e){}
+</script>
+</body>
+</html>
